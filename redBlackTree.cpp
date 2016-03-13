@@ -1,3 +1,5 @@
+//some important explain information has been written in English, I think if you know a little English, you can understand all of the source  code. 
+
 #include <iostream>
 using namespace std;
 #define red 1
