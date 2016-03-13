@@ -1,4 +1,5 @@
-//some important explain information has been written in English, I think if you know a little English, you can understand all of the source  code. 
+//some important explain information has been written in English, I think if you know a little English, 
+//you can understand all of the source  code. 
 
 #include <iostream>
 using namespace std;
@@ -6,32 +7,32 @@ using namespace std;
 #define black 0
 typedef struct rbNode * prbNode;
 struct rbNode{
-	double key;//½ÚµãºËĞÄĞÅÏ¢
+	double key;//èŠ‚ç‚¹æ ¸å¿ƒä¿¡æ¯
 	int color;
 	int number;
 	prbNode lChild;
 	prbNode rChild;
 	prbNode parent;
-	int size;//ÒÔµ±Ç°½ÚµãÎª¸ùµÄÊ÷µÄ½Úµã¸öÊı¡£
+	int size;//ä»¥å½“å‰èŠ‚ç‚¹ä¸ºæ ¹çš„æ ‘çš„èŠ‚ç‚¹ä¸ªæ•°ã€‚
 };
-//ºìºÚÊ÷µÄ½ÚµãÈç´ËÅÅÁĞ£¬×ó×ÓÊ÷ÎªĞ¡ÓÚµÈÓÚ¸ùµÄ½Úµã
+//çº¢é»‘æ ‘çš„èŠ‚ç‚¹å¦‚æ­¤æ’åˆ—ï¼Œå·¦å­æ ‘ä¸ºå°äºç­‰äºæ ¹çš„èŠ‚ç‚¹
 typedef struct rbTree * prbTree;
 struct rbTree{
 	prbNode root;
-	prbNode stl;//Ö¸ÏòÉÚ±ø½Úµã
+	prbNode stl;//æŒ‡å‘å“¨å…µèŠ‚ç‚¹
 };
 
-/**********¶ÔÁĞ²Ù×÷*************/
+/**********å¯¹åˆ—æ“ä½œ*************/
 typedef struct queue* pqueue;
-//queue½Úµã
+//queueèŠ‚ç‚¹
 struct queue
 {
 	prbNode n;
-	bool t;//true±íÊ¾±¾²ãµÄÄ©Î²£¬false±íÊ¾ÊÇ¿Õ°×½Úµã£»Í¬Ê±nÎªNULL
+	bool t;//trueè¡¨ç¤ºæœ¬å±‚çš„æœ«å°¾ï¼Œfalseè¡¨ç¤ºæ˜¯ç©ºç™½èŠ‚ç‚¹ï¼›åŒæ—¶nä¸ºNULL
 	pqueue next;
 };
 
-//¶ÓÁĞÍ·½Úµã
+//é˜Ÿåˆ—å¤´èŠ‚ç‚¹
 typedef struct queueHead* pqHead;
 struct queueHead
 {
@@ -39,7 +40,7 @@ struct queueHead
 	pqueue tail;
 };
 
-//³õÊ¼»¯¶ÓÁĞ
+//åˆå§‹åŒ–é˜Ÿåˆ—
 pqHead initQueue()
 {
 	pqHead pqh=new queueHead;
@@ -48,7 +49,7 @@ pqHead initQueue()
 	return pqh;
 }
 
-//ÅĞ¶Ï¶ÔÁĞÊÇ·ñÎª¿Õ £¬¿Õ·µ»ØÕæ
+//åˆ¤æ–­å¯¹åˆ—æ˜¯å¦ä¸ºç©º ï¼Œç©ºè¿”å›çœŸ
 bool isNullQueue(pqHead pqh)
 {
 	if(pqh->head==NULL&&pqh->tail==NULL)
@@ -58,7 +59,7 @@ bool isNullQueue(pqHead pqh)
 	return false;
 }
 
-//Èë¶Ó
+//å…¥é˜Ÿ
 void enQueue(pqHead pqh, pqueue node)
 {
 	if(pqh->head==NULL&&pqh->tail==NULL)
@@ -76,7 +77,7 @@ void enQueue(pqHead pqh, pqueue node)
 		node->next=NULL;
 }
  
-//³ö¶Ó
+//å‡ºé˜Ÿ
 pqueue deQueue(pqHead pqh)
 {
 	pqueue node=pqh->head;
@@ -88,19 +89,19 @@ pqueue deQueue(pqHead pqh)
 	}
 	return node;
 }
-/***¶ÔÁĞ²Ù×÷end**/
+/***å¯¹åˆ—æ“ä½œend**/
 
 
 
 
-prbTree initRBTree(){//³õÊ¼Ê±½¨Á¢¿ÕÊ÷£¬Ê¹Ö¸ÕëÖ¸Ïòsentinel½Úµã¡£
+prbTree initRBTree(){//åˆå§‹æ—¶å»ºç«‹ç©ºæ ‘ï¼Œä½¿æŒ‡é’ˆæŒ‡å‘sentinelèŠ‚ç‚¹ã€‚
 	prbTree tree=new rbTree;
 
 	prbNode sentinel=new rbNode;
 	sentinel->color=black;
 	sentinel->lChild=NULL;
 	sentinel->rChild=NULL;
-	sentinel->parent=NULL;//sentinelµÄÈı¸öÖ¸Õë¶¼ÎªNULL
+	sentinel->parent=NULL;//sentinelçš„ä¸‰ä¸ªæŒ‡é’ˆéƒ½ä¸ºNULL
 	sentinel->size=0;
 	sentinel->number=0;
 
@@ -114,7 +115,7 @@ void leftRotate(prbTree tree, prbNode x){
 	y=x->rChild;
 	b=y->lChild;
 
-	//Î¬»¤½Úµã¼äµÄÖ¸Õë
+	//ç»´æŠ¤èŠ‚ç‚¹é—´çš„æŒ‡é’ˆ
 	y->lChild=x;
 	y->parent=x->parent;
 	x->parent=y;
@@ -122,7 +123,7 @@ void leftRotate(prbTree tree, prbNode x){
 	b->parent=x;
 
 	
-	if(y->parent!=tree->stl){//Èç¹ûyµÄ¸¸Ç×²»Îª¿Õ£¬¼´y²»Îª¸ù½Úµã
+	if(y->parent!=tree->stl){//å¦‚æœyçš„çˆ¶äº²ä¸ä¸ºç©ºï¼Œå³yä¸ä¸ºæ ¹èŠ‚ç‚¹
 		if(y->parent->key>=y->key){
 			y->parent->lChild=y;
 		}else{
@@ -132,7 +133,7 @@ void leftRotate(prbTree tree, prbNode x){
 		tree->root=y;
 	}
 	
-	//Î¬»¤½ÚµãµÄsize×Ö¶Î
+	//ç»´æŠ¤èŠ‚ç‚¹çš„sizeå­—æ®µ
 	y->size=x->size;
 	x->size=x->lChild->size+x->rChild->size+1;
 }
@@ -148,8 +149,8 @@ void rightRotate(prbTree tree,prbNode y){
 	y->lChild=b;
 	b->parent=y;
 
-	//Î¬»¤½Úµã¼äµÄÖ¸Õë
-	if(x->parent!=tree->stl){//Èç¹ûyµÄ¸¸Ç×²»Îª¿Õ£¬¼´x²»Îª¸ù½Úµã
+	//ç»´æŠ¤èŠ‚ç‚¹é—´çš„æŒ‡é’ˆ
+	if(x->parent!=tree->stl){//å¦‚æœyçš„çˆ¶äº²ä¸ä¸ºç©ºï¼Œå³xä¸ä¸ºæ ¹èŠ‚ç‚¹
 		if(x->parent->key>=x->key){
 			x->parent->lChild=x;
 		}else{
@@ -159,22 +160,22 @@ void rightRotate(prbTree tree,prbNode y){
 		tree->root=x;
 	}
 	
-	//Î¬»¤½ÚµãµÄsize×Ö¶Î
+	//ç»´æŠ¤èŠ‚ç‚¹çš„sizeå­—æ®µ
 	x->size=y->size;
 	y->size=y->lChild->size+y->rChild->size+1;
 }
 
-void insertFixup(prbTree tree,prbNode x){//²åÈëÒ»¸ö½Úµãºó£¬¶ÔºìºÚÊ÷½øĞĞµ÷ÕûÒ»±£³ÖºìºÚÊ÷ĞÔÖÊ¡£
+void insertFixup(prbTree tree,prbNode x){//æ’å…¥ä¸€ä¸ªèŠ‚ç‚¹åï¼Œå¯¹çº¢é»‘æ ‘è¿›è¡Œè°ƒæ•´ä¸€ä¿æŒçº¢é»‘æ ‘æ€§è´¨ã€‚
 	prbNode px=NULL;
 	prbNode ppx=NULL;
 	prbNode xuncle=NULL;
 	while(1){//1
 		px=x->parent;
 		ppx=px->parent;
-		if(px->color==black){//xÎª¸ù½ÚµãµÄÇé¿öÔÚinsertÖĞÒÑ¿¼ÂÇ£¬ËùÓĞpxÒ»¶¨´æÔÚ
+		if(px->color==black){//xä¸ºæ ¹èŠ‚ç‚¹çš„æƒ…å†µåœ¨insertä¸­å·²è€ƒè™‘ï¼Œæ‰€æœ‰pxä¸€å®šå­˜åœ¨
 			return;
 		}else if(ppx!=tree->stl){
-			if(px==ppx->lChild){//Èç¹ûpxÊÇppxµÄ×ó¶ù×Ó
+			if(px==ppx->lChild){//å¦‚æœpxæ˜¯ppxçš„å·¦å„¿å­
 				xuncle=ppx->rChild;
 				if(xuncle->color==red){
 					px->color=black;
@@ -192,7 +193,7 @@ void insertFixup(prbTree tree,prbNode x){//²åÈëÒ»¸ö½Úµãºó£¬¶ÔºìºÚÊ÷½øĞĞµ÷ÕûÒ»±£³
 						x=px;
 					}
 				}
-			}else{////Èç¹ûpxÊÇppxµÄÓÒ¶ù×Ó
+			}else{////å¦‚æœpxæ˜¯ppxçš„å³å„¿å­
 				xuncle=ppx->lChild;
 				if(xuncle->color==red){
 					xuncle->color=black;
@@ -220,16 +221,16 @@ void insertFixup(prbTree tree,prbNode x){//²åÈëÒ»¸ö½Úµãºó£¬¶ÔºìºÚÊ÷½øĞĞµ÷ÕûÒ»±£³
 
 void insert(prbTree tree,prbNode x){
 	x->size=1;
-	if(tree->root==tree->stl){//Èç¹ûÊ÷Îª¿ÕÊ÷£¬´ËÊ±£¬rootÖ¸ÏòµÄÊÇsentinel£¬sentinelµÄËùÓĞÖ¸Õë¶¼Îª0.
+	if(tree->root==tree->stl){//å¦‚æœæ ‘ä¸ºç©ºæ ‘ï¼Œæ­¤æ—¶ï¼ŒrootæŒ‡å‘çš„æ˜¯sentinelï¼Œsentinelçš„æ‰€æœ‰æŒ‡é’ˆéƒ½ä¸º0.
 		tree->root=x;
 		x->color=black;
 		x->lChild=tree->stl;
 		x->rChild=tree->stl;
 		x->parent=tree->stl;		
-	}else{//Ê÷²»Îª¿ÕÊ÷
+	}else{//æ ‘ä¸ä¸ºç©ºæ ‘
 		prbNode node1=tree->root;
 		prbNode node2=NULL;
-		while(node1!=tree->stl){///´Ë´¦×¢ÒâĞÂ²åÈëµÄ½ÚµãµÄsizeÖµÒªÖÃÎª1
+		while(node1!=tree->stl){///æ­¤å¤„æ³¨æ„æ–°æ’å…¥çš„èŠ‚ç‚¹çš„sizeå€¼è¦ç½®ä¸º1
 			node2=node1;
 			node1->size=node1->size+1;
 			if(x->key<=node1->key){				
@@ -260,21 +261,21 @@ void delFixup(prbTree tree, prbNode x)
 	while(x->color==black&&x!=tree->root)
 	{//1
 		px=x->parent;	
-		if(x==px->lChild)//Èç¹ûxÎªpxµÄ×óº¢×Ó
+		if(x==px->lChild)//å¦‚æœxä¸ºpxçš„å·¦å­©å­
 		{//2
 			xuncle=px->rChild;
-			if(xuncle->color==red)//Èç¹ûxµÄuncle½ÚµãÎªºìÉ«
+			if(xuncle->color==red)//å¦‚æœxçš„uncleèŠ‚ç‚¹ä¸ºçº¢è‰²
 			{
 				leftRotate(tree, px);
 				xuncle->color=black;
 				px->color=red;
 			}
-			else if(xuncle->lChild->color==black&&xuncle->rChild->color==black)//Èç¹ûxuncleÎªºÚÉ«ÇÒÁ½¸ö×ÓÅ®¶¼ÎªºÚÉ«
+			else if(xuncle->lChild->color==black&&xuncle->rChild->color==black)//å¦‚æœxuncleä¸ºé»‘è‰²ä¸”ä¸¤ä¸ªå­å¥³éƒ½ä¸ºé»‘è‰²
 			{
 				xuncle->color=red;
 				x=px;
 			}
-			else if(xuncle->lChild->color==black&&xuncle->rChild->color==red)//Èç¹ûxuncleËùÖ¸µÄ×óº¢×ÓÎªºÚÉ«£¬ÓÒº¢×ÓÎªºìÉ«
+			else if(xuncle->lChild->color==black&&xuncle->rChild->color==red)//å¦‚æœxuncleæ‰€æŒ‡çš„å·¦å­©å­ä¸ºé»‘è‰²ï¼Œå³å­©å­ä¸ºçº¢è‰²
 			{
 				leftRotate(tree, px);
 				if(px->color==black)
@@ -288,7 +289,7 @@ void delFixup(prbTree tree, prbNode x)
 				xuncle->lChild->color=black;
 				xuncle->color=red;
 				rightRotate(tree, xuncle);
-				x->parent=px;//µ±xÎªsentinelÊ±×óĞı»òÓÒĞı»áÊ¹xµÄparentÖ¸ÕëÖ¸´íÎ»ÖÃ
+				x->parent=px;//å½“xä¸ºsentinelæ—¶å·¦æ—‹æˆ–å³æ—‹ä¼šä½¿xçš„parentæŒ‡é’ˆæŒ‡é”™ä½ç½®
 			}
 			else
 			{
@@ -297,7 +298,7 @@ void delFixup(prbTree tree, prbNode x)
 				xuncle->rChild->color=black;
 			}
 		}//2end
-		else//xÎªpxµÄÓÒº¢×Ó
+		else//xä¸ºpxçš„å³å­©å­
 		{
 			xuncle=px->lChild;
 			if(xuncle->color==red)//
@@ -338,10 +339,10 @@ void delFixup(prbTree tree, prbNode x)
 	x->color=black;
 }
 
-//É¾³ıÔÚ¶ş²æÊ÷ÖĞ²éÕÒµ½µÄµÚÒ»¸öÖµÎªzµÄ½Úµã
+//åˆ é™¤åœ¨äºŒå‰æ ‘ä¸­æŸ¥æ‰¾åˆ°çš„ç¬¬ä¸€ä¸ªå€¼ä¸ºzçš„èŠ‚ç‚¹
 void del(prbTree tree, double z)
 {
-	prbNode node1=tree->root;//ÓÃÓÚ²éÕÒ²¢±íÊ¾±»É¾³ıµÄ½Úµã
+	prbNode node1=tree->root;//ç”¨äºæŸ¥æ‰¾å¹¶è¡¨ç¤ºè¢«åˆ é™¤çš„èŠ‚ç‚¹
 	prbNode temp=NULL;
 	prbNode node2=NULL;
 	prbNode x=NULL;
@@ -365,7 +366,7 @@ void del(prbTree tree, double z)
 	}//1end
 	if(node1==tree->stl)
 	{
-		cout<<"ºìºÚÊ÷ÖĞÃ»ÓĞkeyÖµÎª:"<<z<<"µÄ½Úµã¡£\n";
+		cout<<"çº¢é»‘æ ‘ä¸­æ²¡æœ‰keyå€¼ä¸º:"<<z<<"çš„èŠ‚ç‚¹ã€‚\n";
 	}
 	else
 	{
@@ -375,7 +376,7 @@ void del(prbTree tree, double z)
 			temp->size=temp->size-1;
 			temp=temp->parent;
 		}
-		if(node1->rChild!=tree->stl)//Èç¹ûnode1µÄÓÒ×ÓÊ÷´æÔÚ
+		if(node1->rChild!=tree->stl)//å¦‚æœnode1çš„å³å­æ ‘å­˜åœ¨
 		{
 			//node1->size=node1->size-1;
 			node2=node1->rChild;
@@ -384,7 +385,7 @@ void del(prbTree tree, double z)
 				node2->size=node2->size-1;
 				node2=node2->lChild;
 			}
-			x=node2->rChild;//node2Ö¸Ïònode1µÄºóĞø½Úµã
+			x=node2->rChild;//node2æŒ‡å‘node1çš„åç»­èŠ‚ç‚¹
 			//node1->key=node2->key;                                              
 			node2->rChild->parent=node2->parent;
 			if(node2->key>node2->parent->key)
@@ -401,12 +402,12 @@ void del(prbTree tree, double z)
 				delFixup(tree, x);
 			}
 		}
-		else//node1µÄÓÒ×ÓÊ÷²»´æÔÚ
+		else//node1çš„å³å­æ ‘ä¸å­˜åœ¨
 		{//1
-			if(node1->lChild==tree->stl)//Èç¹ûnode1µÄ×ó×ÓÊ÷Ò²²»´æÔÚ
+			if(node1->lChild==tree->stl)//å¦‚æœnode1çš„å·¦å­æ ‘ä¹Ÿä¸å­˜åœ¨
 			{
 				if(node1!=tree->root)
-				{//Èç¹ûnode1²»Îª¸ù
+				{//å¦‚æœnode1ä¸ä¸ºæ ¹
 					//node1->parent->size=node1->size-1;
 					x=tree->stl;
 					if(node1->parent->key<node1->key)
@@ -428,9 +429,9 @@ void del(prbTree tree, double z)
 					tree->root=tree->stl;
 				}
 			}
-			else//Èç¹ûnode1µÄ×ó×ÓÊ÷´æÔÚ
+			else//å¦‚æœnode1çš„å·¦å­æ ‘å­˜åœ¨
 			{
-				//Èç¹ûnode1Îª¸ù½Úµã
+				//å¦‚æœnode1ä¸ºæ ¹èŠ‚ç‚¹
 				if(node1==tree->root)
 				{
 					tree->root=node1->lChild;
@@ -439,7 +440,7 @@ void del(prbTree tree, double z)
 				}
 				else
 				{
-					x=node1->lChild;//ÒÔxÎª¸ù½øĞĞºìºÚµ÷Õû
+					x=node1->lChild;//ä»¥xä¸ºæ ¹è¿›è¡Œçº¢é»‘è°ƒæ•´
 					if(node1->key>node1->parent->key)
 					{
 						node1->parent->rChild=node1->lChild;
@@ -465,7 +466,7 @@ void showRBTree2(prbTree tree)
 	{
 		return;
 	}
-	cout<<"ºìºÚÊ÷µÄ½ÚµãĞÅÏ¢Îª: ±àºÅ|key|color|size|¸¸½Úµã±àºÅ\n";
+	cout<<"çº¢é»‘æ ‘çš„èŠ‚ç‚¹ä¿¡æ¯ä¸º: ç¼–å·|key|color|size|çˆ¶èŠ‚ç‚¹ç¼–å·\n";
 
 	pqHead pqh=initQueue();
 
@@ -515,7 +516,7 @@ void showRBTree2(prbTree tree)
 	}
 }
 
-//³ö¶Ó²¢Êä³ö±¾½ÚµãµÄÖµÊ±Í¬Ê±½«×Ó½Úµã£¨°üÀ¨¿Õ½Úµã£©Èë¶Ó£¬Èç¹ûÓöµ½»»²ã½ÚµãÔòÒªÔÚ¶ÔÎ²¼ÓÉÏ»»²ã½Úµã£¬ÒòÎª±¾²ãµÄËùÓĞ½ÚµãÒÑÈë¶Ó
+//å‡ºé˜Ÿå¹¶è¾“å‡ºæœ¬èŠ‚ç‚¹çš„å€¼æ—¶åŒæ—¶å°†å­èŠ‚ç‚¹ï¼ˆåŒ…æ‹¬ç©ºèŠ‚ç‚¹ï¼‰å…¥é˜Ÿï¼Œå¦‚æœé‡åˆ°æ¢å±‚èŠ‚ç‚¹åˆ™è¦åœ¨å¯¹å°¾åŠ ä¸Šæ¢å±‚èŠ‚ç‚¹ï¼Œå› ä¸ºæœ¬å±‚çš„æ‰€æœ‰èŠ‚ç‚¹å·²å…¥é˜Ÿ
 void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I didn't add spaces to make it like a real tree.)
 {
 	if(tree->root==tree->stl)
@@ -523,7 +524,7 @@ void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I did
 		cout<<"the tree is empty.\n";
 		return;
 	}
-	//cout<<"ºìºÚÊ÷µÄ½ÚµãĞÅÏ¢Îª: ±àºÅ|key|color|size|¸¸½Úµã±àºÅ\n";
+	//cout<<"çº¢é»‘æ ‘çš„èŠ‚ç‚¹ä¿¡æ¯ä¸º: ç¼–å·|key|color|size|çˆ¶èŠ‚ç‚¹ç¼–å·\n";
 	cout<<"the red-black-tree's node information is listed in form of the following: number|key|color|size|parent's number\n";
 	pqHead pqh=initQueue();
 
@@ -535,12 +536,12 @@ void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I did
 	node=new queue;
 	node->n=NULL;
 	node->t=true;
-	enQueue(pqh, node);//±¾²ã½áÊøµÄĞÅºÅ
+	enQueue(pqh, node);//æœ¬å±‚ç»“æŸçš„ä¿¡å·
 
 	pqueue temp=NULL;
 
 	//bool isEnd=false;
-	pqueue temp2=NULL;//ÓÃÓÚ¼ì²âÊÇÕû¸öÊ÷ÒÑ¾­ÊäÍê
+	pqueue temp2=NULL;//ç”¨äºæ£€æµ‹æ˜¯æ•´ä¸ªæ ‘å·²ç»è¾“å®Œ
 
 	prbNode prbn=NULL;	
 	while(!isNullQueue(pqh))
@@ -578,7 +579,7 @@ void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I did
 		}
 		else
 		{
-			if(temp->t==true)//&&temp->n==NULL±íÊ¾±¾²ãµÄÊä³ö½áÊø¡£Òª»»ĞĞÁË
+			if(temp->t==true)//&&temp->n==NULLè¡¨ç¤ºæœ¬å±‚çš„è¾“å‡ºç»“æŸã€‚è¦æ¢è¡Œäº†
 			{
 				cout<<"\n";
 
@@ -600,9 +601,9 @@ void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I did
 				node=new queue;
 				node->n=NULL;
 				node->t=true;
-				enQueue(pqh, node);//±¾²ã½áÊøµÄĞÅºÅ
+				enQueue(pqh, node);//æœ¬å±‚ç»“æŸçš„ä¿¡å·
 			}
-			else//temp->t==false&&temp->n==NULL£¬±íÊ¾±¾½ÚµãÎª¿Õ½Úµã
+			else//temp->t==false&&temp->n==NULLï¼Œè¡¨ç¤ºæœ¬èŠ‚ç‚¹ä¸ºç©ºèŠ‚ç‚¹
 			{
 				cout<<" {*|*|*|*|*} ";
 
@@ -615,22 +616,22 @@ void showRBTree3(prbTree tree)//show the tree in the shape of the tree(but I did
 				enQueue(pqh, node);	
 			}
 		}
-		//ÅĞ¶ÏÊÇ·ñÒª¼ÓÉÏ»»ĞĞµÄ±ê¼Ç
+		//åˆ¤æ–­æ˜¯å¦è¦åŠ ä¸Šæ¢è¡Œçš„æ ‡è®°
 
 	}
 
 }
 
-void showRBTree(prbTree tree){//ÖĞĞò±éÀúºìºÚÊ÷...show tree's node in the order of the "key" value from min to max.
-	//cout<<"ºìºÚÊ÷µÄ½ÚµãĞÅÏ¢Îª: ĞòºÅ|µØÖ·|key|color|size|parent|lChild|rChild\n";
-	//cout<<"ºìºÚÊ÷µÄ½ÚµãĞÅÏ¢Îª: ĞòºÅ|±àºÅ|¸¸½Úµã±àºÅ|key|color|size\n";
+void showRBTree(prbTree tree){//ä¸­åºéå†çº¢é»‘æ ‘...show tree's node in the order of the "key" value from min to max.
+	//cout<<"çº¢é»‘æ ‘çš„èŠ‚ç‚¹ä¿¡æ¯ä¸º: åºå·|åœ°å€|key|color|size|parent|lChild|rChild\n";
+	//cout<<"çº¢é»‘æ ‘çš„èŠ‚ç‚¹ä¿¡æ¯ä¸º: åºå·|ç¼–å·|çˆ¶èŠ‚ç‚¹ç¼–å·|key|color|size\n";
 	cout<<"the red-black-tree's node information is listed in form of the following: index|number|parent's number|key|color|size\n";
 	prbNode node1=tree->root;
 	prbNode node2=NULL;
 	int i=1;
 	int j=0;
 	if(tree->root==tree->stl){
-		//cout<<"Ê÷Îª¿ÕÊ÷¡£"<<endl;
+		//cout<<"æ ‘ä¸ºç©ºæ ‘ã€‚"<<endl;
 		cout<<"tree is empty!\n";
 		return;
 	}
@@ -664,12 +665,12 @@ void showRBTree(prbTree tree){//ÖĞĞò±éÀúºìºÚÊ÷...show tree's node in the order o
 
 int main(){
 	int i=1;
-	int num=0;//´ıÊäÈëµÄ½ÚµãµÄÊıÄ¿¡£
+	int num=0;//å¾…è¾“å…¥çš„èŠ‚ç‚¹çš„æ•°ç›®ã€‚
 	prbNode node=NULL;
 	double a=0;
 	prbTree tree=initRBTree();
 
-	//cout<<"ÇëÊäÈëºìºÚÊ÷µÄ½ÚµãÊı£º\n";
+	//cout<<"è¯·è¾“å…¥çº¢é»‘æ ‘çš„èŠ‚ç‚¹æ•°ï¼š\n";
 	cout<<"please input the number of node of the red-black-tree:\n";
 
 	cin>>num;
@@ -681,7 +682,7 @@ int main(){
 		node->rChild=tree->stl;
 		node->parent=tree->stl;
 		
-		//cout<<"ÇëÊäÈëºìºÚÊ÷µÄµÚ"<<i<<"¸ö½Úµã:\n";
+		//cout<<"è¯·è¾“å…¥çº¢é»‘æ ‘çš„ç¬¬"<<i<<"ä¸ªèŠ‚ç‚¹:\n";
 		cout<<"please input the red-black-tree's "<<i<<"th node:\n";
 		cin>>a;
 		node->key=a;
@@ -692,11 +693,11 @@ int main(){
 	showRBTree(tree);
 	showRBTree3(tree);
 	while(true){
-		//cout<<"ÇëÊäÈëÒªÉ¾³ıµÄ½ÚµãµÄkeyÖµ£º";
+		//cout<<"è¯·è¾“å…¥è¦åˆ é™¤çš„èŠ‚ç‚¹çš„keyå€¼ï¼š";
 		cout<<"please input the node going to be deleted:\n";
 		cin>>a;
 		del(tree, a);
-		//cout<<"É¾³ı½Úµã"<<a<<"ºóµÄÊ÷Îª£º\n";
+		//cout<<"åˆ é™¤èŠ‚ç‚¹"<<a<<"åçš„æ ‘ä¸ºï¼š\n";
 		cout<<"after node being deleted, the tree is:\n";
 		showRBTree(tree);
 		showRBTree3(tree);
